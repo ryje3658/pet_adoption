@@ -8,7 +8,7 @@ import {
 } from "./actionTypes";
 import axios from "axios";
 
-const SERVER_URL = `http://jensenry.pythonanywhere.com`
+const SERVER_URL = `https://jensenry.pythonanywhere.com`
 
 export const authStart = () => {
   return {
