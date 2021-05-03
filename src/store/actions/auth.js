@@ -49,6 +49,7 @@ export const signupFail = (error) => {
 // Logout to remove token from cookie
 export const authLogout = () => {
   localStorage.removeItem("token");
+  window.location.replace("/login");
   return {
     type: AUTH_LOGOUT,
   };
@@ -74,7 +75,7 @@ export const authLogin = (username, password) => {
         password: password,
       })
       .then((res) => {
-        const token = res.data.key;
+        const token = res.data.access;
         localStorage.setItem("token", token);
         dispatch(loginSuccess(token));
         //redirect to homepage
@@ -103,7 +104,7 @@ export const authSignup = (username, email, password, confirm_password) => {
         confirm_password: confirm_password,
       })
       .then((res) => {
-        const token = res.data.key;
+        const token = res.data.access;
         localStorage.setItem("token", token);
         dispatch(signupSuccess(token));
         window.location.replace("/");
@@ -130,7 +131,7 @@ export const authSignupShelter = (username, email, password, confirm_password) =
         confirm_password: confirm_password,
       })
       .then((res) => {
-        const token = res.data.key;
+        const token = res.data.access;
         localStorage.setItem("token", token);
         dispatch(signupSuccess(token));
         window.location.replace("/");
