@@ -7,7 +7,7 @@ import Login from "./components/login";
 import Register from "./components/register";
 import RegisterShelter from "./components/registershelter";
 import {CardList} from './components/card-list/pet-card.component';
-import {Search} from './component/search/search.component'
+import {Search} from './components/search/search.component';
 
 class App extends Component {
   constructor() {
