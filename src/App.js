@@ -7,12 +7,14 @@ import Login from "./components/login";
 import Register from "./components/register";
 import RegisterShelter from "./components/registershelter";
 import {CardList} from './components/card-list/pet-card.component';
+import {Search} from './component/search/search.component'
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      pets: []
+      pets: [],
+      searchField:""
     };
   }
 
@@ -23,6 +25,10 @@ class App extends Component {
   }
 
   render() {
+    const {pets, searchField} = this.state;
+    const filteredPets = pets.filter(pet => 
+      pet.name.toLowerCase().includes(searchField.toLowerCase())
+      )
     return (
       <div>
         <Router>
@@ -35,7 +41,11 @@ class App extends Component {
             </Switch>
           </Layout>
         </Router>
-        <CardList pets={this.state.pets} /> 
+        <Search 
+          placeholder="search pet"
+          handleChange= {e => this.setState({searchField: e.target.value})}
+        />
+        <CardList pets={filteredPets} /> 
       </div>
     );
   }
