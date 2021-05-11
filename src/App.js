@@ -6,8 +6,9 @@ import Home from "./components/home";
 import Login from "./components/login";
 import Register from "./components/register";
 import RegisterShelter from "./components/registershelter";
-import {CardList} from './components/card-list/pet-card.component';
-import {Search} from './components/search/search.component';
+import {CardList} from "./components/card-list/pet-card.component";
+import {Search} from "./components/search/search.component";
+import CheckBox from "./components/checkbox"
 
 class App extends Component {
   constructor() {
@@ -26,9 +27,11 @@ class App extends Component {
 
   render() {
     const {pets, searchField} = this.state;
-    const filteredPets = pets.filter(pet => 
-      pet.name.toLowerCase().includes(searchField.toLowerCase())
-      )
+    const filteredPets = pets.filter(item => {
+      return Object.keys(item).some(key => 
+        typeof item[key] === "string" && item[key].toLowerCase().includes(searchField.toLowerCase())
+      );
+    });
     return (
       <div>
         <Router>
@@ -42,9 +45,10 @@ class App extends Component {
           </Layout>
         </Router>
         <Search 
-          placeholder="search pet"
+          placeholder="Search"
           handleChange= {e => this.setState({searchField: e.target.value})}
         />
+        <CheckBox/>
         <CardList pets={filteredPets} /> 
       </div>
     );
