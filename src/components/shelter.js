@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Card, Image, Button } from 'semantic-ui-react'
+import { Card, Image, Button, Label, Icon, Grid, Item,Header } from 'semantic-ui-react'
 import axios from 'axios'
 import jwt_decode from "jwt-decode"
 
@@ -20,51 +20,49 @@ function AnimalCard (props) {
   }, [url])
 
   if(animal){
-
       content = 
-      <div>
-          <Card.Group>
-              <Card>
-              <Card.Content>
-                  <Image
-                  floated='right'
-                  size='mini'
-                  src={animal.picture_primary}
-                  />
-                  <Card.Header>{animal.name}</Card.Header>
-                  <Card.Meta>{animal.type}</Card.Meta>
-                  <Card.Description>
-                      <p><strong>Gender:</strong> {animal.gender} </p>
-                      <p><strong>Age:</strong> {animal.age} year</p>
-                      <p><strong>Weight:</strong> {animal.weight} lb</p>
-                      <p><strong>Breed:</strong> {animal.breed}</p>
-                      <p><strong>Disposition:</strong> {animal.disposition}</p>
-                      <p><strong>Description:</strong> {animal.description}</p>
-                  </Card.Description>
-              </Card.Content>
-              <Card.Content extra>
-                  <div className='ui two buttons'>
-                  <Button color='olive'>
-                      Edit
-                  </Button>
-                  <Button color='red'>
-                      Remove
-                  </Button>
-                  </div>
-              </Card.Content>
-              </Card>
-              
-          </Card.Group>
-      </div>
+
+      <Card>
+      <Card.Content>
+          <Image
+          floated='right'
+          size='small'
+          src={animal.picture_primary}
+          
+          />
+          <Card.Header>{animal.name}</Card.Header>
+          <Card.Meta>{animal.type}</Card.Meta>
+          <Card.Description>
+              <p><strong>Gender:</strong> {animal.gender} </p>
+              <p><strong>Age:</strong> {animal.age} year</p>
+              <p><strong>Weight:</strong> {animal.weight} lb</p>
+              <p><strong>Breed:</strong> {animal.breed}</p>
+              <p><strong>Disposition:</strong> {animal.disposition}</p>
+              <p><strong>Description:</strong> {animal.description}</p>
+          </Card.Description>
+      </Card.Content>
+      <Card.Content extra>
+          <div className='ui two buttons'>
+          <Button color='teal'>
+              Edit
+          </Button>
+          <Button color='red'>
+              Remove
+          </Button>
+          </div>
+      </Card.Content>
+      </Card>
 
 
   }
 
   return (
       <div>
-          {content}
-
+        {content}   
       </div>
+          
+
+      
   )
 
 }
@@ -75,7 +73,8 @@ function Shelter(){
   let decodedToken = jwt_decode(token);
   //console.log("Decoded Token", decodedToken);
 
-  const id = decodedToken.user_id
+  //const id = decodedToken.user_id
+  const id = 25
   
   const url = `https://jensenry.pythonanywhere.com/api/users/${id}`
   const [profiles, setProfiles] = useState({
@@ -125,36 +124,47 @@ function Shelter(){
   if(profiles.data){
  
     content = 
+    <>
+
+    <Header as='h2' icon textAlign='center'>
+      <Icon name='users' circular />
+      <Header.Content>{profiles.data.username}</Header.Content>
+      <Header.Subheader>
+        <p>Bio: {profiles.data.profile.bio}</p>
+        <p>Email: {profiles.data.email}</p>
+        <p>{profiles.data.profile.shelter_name}</p>
+    </Header.Subheader>
+
+    <Button color='blue'>Add a Pet</Button>
+    
+    </Header>
+    <Image
+      centered
+      size='small'
+      src={shelter_logo}
+    />
 
     <div>
-      <Card centered>
-        <Card.Content textAlign='center'>
-          <Card.Header>Shelter Profile</Card.Header>
-
-        </Card.Content >
-        <Image src={shelter_logo} wrapped ui={false} />
-        <Card.Content>
-          <Card.Header><p>Name: {profiles.data.profile.shelter_name}</p></Card.Header>
-          <Card.Description>
-            <p>Username: {profiles.data.username}</p>
-            <p>Bio: {profiles.data.profile.bio}</p>
-            <Button color='blue'>Add a Pet</Button>
-          </Card.Description>
-        </Card.Content>
-        
-        <p>Pets:</p>
-        {profiles.data.pets.map((pet) =>{
-          return (
-            <AnimalCard
-            animal = {pet}
-          />)
-        })}
-
-      </Card>
-      
-      
-
     </div>
+    ...
+
+    <div>
+    <Card.Group centered>
+    {profiles.data.pets.map((pet) =>{
+              return (
+                <AnimalCard
+            animal = {pet}
+          />
+            )
+          })}
+    </Card.Group>
+    </div>
+
+
+
+
+      
+ </>
     
   }
   
@@ -162,10 +172,10 @@ function Shelter(){
     <div>
       {content}
     </div>
-   
-  
+      
+
+      
+
   )
-
 }
-
   export default Shelter;
