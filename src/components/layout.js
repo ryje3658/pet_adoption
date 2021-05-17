@@ -8,13 +8,18 @@ import { connect } from "react-redux";
 import * as actionTypes from "../store/actions/auth";
 import { Link } from "react-router-dom";
 
+
 class Layout extends Component {
   componentDidMount() {
     this.props.autoSignin();
   }
 
   render() {
+    
+
+    
     return (
+
       <div>
         <Menu inverted>
           <Container>
@@ -26,9 +31,28 @@ class Layout extends Component {
             </Link>
             <Menu.Menu position="right">
               {this.props.authenticated ? (
-                <Menu.Item onClick={() => this.props.logout()}>
-                  Logout
-                </Menu.Item>
+                <>
+                  <React.Fragment>
+                    <Link to="/shelter">
+                      <Menu.Item>Welcome</Menu.Item>
+                    </Link>
+                    
+
+                  </React.Fragment>
+
+                  <React.Fragment>
+                    
+                    <Menu.Item onClick={() => this.props.logout()}>
+                      Logout
+                    </Menu.Item>
+
+                  </React.Fragment>
+
+
+                </>
+
+
+
 
               ) : (
                 <React.Fragment>
@@ -41,6 +65,7 @@ class Layout extends Component {
                   <Link to="/registershelter">
                     <Menu.Item>Shelter-SignUp</Menu.Item>
                   </Link>
+
                 </React.Fragment>
               )}
             </Menu.Menu>
@@ -58,6 +83,7 @@ class Layout extends Component {
 const mapStateToProps = (state) => {
   return {
     authenticated: state.token !== null,
+    tok: state.token,
   };
 };
 
