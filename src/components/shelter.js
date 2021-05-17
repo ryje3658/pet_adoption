@@ -73,8 +73,8 @@ function Shelter(){
   let decodedToken = jwt_decode(token);
   //console.log("Decoded Token", decodedToken);
 
-  //const id = decodedToken.user_id
-  const id = 25
+  const id = decodedToken.user_id
+  //const id = 25
   
   const url = `https://jensenry.pythonanywhere.com/api/users/${id}`
   const [profiles, setProfiles] = useState({
