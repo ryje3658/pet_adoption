@@ -6,6 +6,7 @@ import Home from "./components/home";
 import Login from "./components/login";
 import Register from "./components/register";
 import RegisterShelter from "./components/registershelter";
+import ContentFeed from "./components/shelter";
 
 
 class App extends Component {
@@ -19,6 +20,7 @@ class App extends Component {
               <Route path="/login" component={Login} />
               <Route path="/register" component={Register} />
               <Route path="/registershelter" component={RegisterShelter} />
+              <Route path="/shelter" component={ContentFeed} />
             </Switch>
           </Layout>
         </Router>
