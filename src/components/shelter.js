@@ -5,6 +5,8 @@ import jwt_decode from "jwt-decode"
 
 import shelter_logo from '../assets/pet_shelter_logo.png';
 
+
+
 function AnimalCard (props) {
 
   const url = `${props.animal}`
@@ -22,7 +24,7 @@ function AnimalCard (props) {
   if(animal){
       content = 
 
-      <Card>
+      <Card color='blue'>
       <Card.Content>
           <Image
           floated='right'
@@ -42,14 +44,16 @@ function AnimalCard (props) {
           </Card.Description>
       </Card.Content>
       <Card.Content extra>
-          <div className='ui two buttons'>
-          <Button color='teal'>
-              Edit
-          </Button>
-          <Button color='red'>
-              Remove
-          </Button>
-          </div>
+        <a>
+          <Icon name='tag' />
+          {animal.availability}
+        </a>
+      </Card.Content>
+      <Card.Content extra>
+        <div>
+          <Button color='green'>Edit</Button>
+          <Button color='red'>Remove</Button>
+        </div>
       </Card.Content>
       </Card>
 
@@ -73,8 +77,8 @@ function Shelter(){
   let decodedToken = jwt_decode(token);
   //console.log("Decoded Token", decodedToken);
 
-  const id = decodedToken.user_id
-  //const id = 25
+  //const id = decodedToken.user_id
+  const id = 25
   
   const url = `https://jensenry.pythonanywhere.com/api/users/${id}`
   const [profiles, setProfiles] = useState({
@@ -148,16 +152,17 @@ function Shelter(){
     </div>
     ...
 
-    <div>
-    <Card.Group centered>
-    {profiles.data.pets.map((pet) =>{
-              return (
-                <AnimalCard
-            animal = {pet}
-          />
-            )
-          })}
-    </Card.Group>
+    <div >
+          <Grid textAlign='center'>
+            {profiles.data.pets.map((pet) =>{
+                    return (
+                      <AnimalCard
+                  animal = {pet}
+                />
+                  )
+                })}
+
+          </Grid>  
     </div>
 
 
