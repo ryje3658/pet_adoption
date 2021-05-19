@@ -1,0 +1,38 @@
+.image {
+    height: 100px;
+    display: inline;
+    vertical-align: middle;
+}
+
+#title {
+    margin-left: 125px;
+    display: block;
+    padding-top: 25px;
+}
+
+#form {
+    margin-left: 150px;
+    padding-top: 25px;
+    display: block
+}
+
+#removeb {
+    margin-top: 10px;
+}
+
+#removec {
+    margin-top: 10px;
+}
+
+.newimg {
+    vertical-align: middle;
+}
+
+#bottom {
+    padding-bottom: 40px;
+}
+
+.labels {
+    font-size: large;
+    font-weight: 600;
+}

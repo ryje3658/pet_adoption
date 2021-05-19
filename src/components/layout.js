@@ -36,8 +36,11 @@ class Layout extends Component {
                     <Link to="/shelter">
                       <Menu.Item>Welcome</Menu.Item>
                     </Link>
-                    
-
+                  </React.Fragment>
+                  <React.Fragment>
+                    <Link to="/pets">
+                      <Menu.Item>Pets</Menu.Item>
+                    </Link>
                   </React.Fragment>
 
                   <React.Fragment>
