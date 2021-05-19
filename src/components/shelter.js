@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Card, Image, Button, Label, Icon, Grid, Item,Header } from 'semantic-ui-react'
+import { Card, Image, Button, Icon, Grid, Item,Header } from 'semantic-ui-react'
 import axios from 'axios'
 import jwt_decode from "jwt-decode"
+import PetForm from "./pet-forms/newpet"
+import { Link } from "react-router-dom";
 
 import shelter_logo from '../assets/pet_shelter_logo.png';
 
@@ -51,8 +53,13 @@ function AnimalCard (props) {
       </Card.Content>
       <Card.Content extra>
         <div>
-          <Button color='green'>Edit</Button>
-          <Button color='red'>Remove</Button>
+          <Link to={{
+            pathname: "/UpdateForm",
+            state: {id: animal.id}
+          }}>
+            <Button color='green'>Edit</Button>
+          </Link>
+          
         </div>
       </Card.Content>
       </Card>
@@ -65,7 +72,6 @@ function AnimalCard (props) {
         {content}   
       </div>
           
-
       
   )
 
@@ -77,8 +83,8 @@ function Shelter(){
   let decodedToken = jwt_decode(token);
   //console.log("Decoded Token", decodedToken);
 
-  //const id = decodedToken.user_id
-  const id = 25
+  const id = decodedToken.user_id
+  //const id = 25
   
   const url = `https://jensenry.pythonanywhere.com/api/users/${id}`
   const [profiles, setProfiles] = useState({
@@ -138,8 +144,11 @@ function Shelter(){
         <p>Email: {profiles.data.email}</p>
         <p>{profiles.data.profile.shelter_name}</p>
     </Header.Subheader>
+    <Link to="/PetForm">
+    <Button color='blue'>Add a Pet </Button>
+    </Link>
 
-    <Button color='blue'>Add a Pet</Button>
+    
     
     </Header>
     <Image

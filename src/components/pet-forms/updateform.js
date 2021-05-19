@@ -14,7 +14,8 @@ let options = null;
 let dispo = [];
 
 // PET ID CURRENTLY HARDCOADED UNTIL MERGE
-let id = 28;
+//let id = this.props.location.state.id;
+//let id = 30
 
 
 let pet;
@@ -49,6 +50,7 @@ class UpdateForm extends Component {
         
     // submits updated pet infomration from form
     submitHandler = event => {
+        let id = this.props.location.state.id
         event.preventDefault(); 
         const formdata = new FormData()  
         if (this.state.name !== null) {
@@ -137,6 +139,7 @@ class UpdateForm extends Component {
 
     // loads the pet data into form fields
     componentDidMount() {
+      let id = this.props.location.state.id
         axios.get(`http://jensenry.pythonanywhere.com/api/pets/${id}/`,{
             headers: {
                 "Content-Type": "application/json",
@@ -261,6 +264,7 @@ class UpdateForm extends Component {
     
     // deletes pet
     removepet = () => {
+      let id = this.props.location.state.id
         axios.delete(`http://jensenry.pythonanywhere.com/api/pets/${id}/`, {
           headers: {
               Authorization: `Bearer ${token}`
@@ -272,7 +276,7 @@ class UpdateForm extends Component {
     // after pet removed, redirects
     removeredirect = () =>{
       if (this.state.redirect){
-        return <Redirect to='/' />
+        return <Redirect to='/shelter' />
       }
     }
 

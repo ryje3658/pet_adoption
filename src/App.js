@@ -6,32 +6,17 @@ import Home from "./components/home";
 import Login from "./components/login";
 import Register from "./components/register";
 import RegisterShelter from "./components/registershelter";
-import {CardList} from "./components/card-list/pet-card.component";
-import {Search} from "./components/search/search.component";
+import Pets from "./components/pets"
+import Shelter from  "./components/shelter";
+import PetForm from "./components/pet-forms/newpet";
+import UpdateForm from "./components/pet-forms/updateform";
+
+
 
 
 class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      pets: [],
-      searchField:""
-    };
-  }
-
-  componentDidMount() {
-    fetch('http://jensenry.pythonanywhere.com/api/pets/?format=json')
-    .then(response => response.json())
-    .then(names => this.setState({pets: names}))
-  }
 
   render() {
-    const {pets, searchField} = this.state;
-    const filteredPets = pets.filter(item => {
-      return Object.keys(item).some(key => 
-        typeof item[key] === "string" && item[key].toLowerCase().includes(searchField.toLowerCase())
-      );
-    });
     return (
       <div>
         <Router>
@@ -41,14 +26,13 @@ class App extends Component {
               <Route path="/login" component={Login} />
               <Route path="/register" component={Register} />
               <Route path="/registershelter" component={RegisterShelter} />
+              <Route path='/pets' component={Pets}/>
+              <Route path="/shelter" component={Shelter} />
+              <Route path="/PetForm" component={PetForm} />
+              <Route path="/UpdateForm" component={UpdateForm} />
             </Switch>
           </Layout>
         </Router>
-        <Search 
-          placeholder="Search"
-          handleChange= {e => this.setState({searchField: e.target.value})}
-        />
-        <CardList pets={filteredPets} /> 
       </div>
     );
   }
