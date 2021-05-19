@@ -1,0 +1,19 @@
+#title {
+    margin-left: 125px;
+    display: block;
+    padding-top: 25px;
+}
+
+#form {
+    margin-left: 150px;
+    padding-top: 25px;
+    display: block
+}
+#picture_second {
+    display: hidden;
+}
+
+.labels {
+    font-size: large;
+    font-weight: 600;
+}
