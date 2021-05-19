@@ -6,13 +6,11 @@ import Home from "./components/home";
 import Login from "./components/login";
 import Register from "./components/register";
 import RegisterShelter from "./components/registershelter";
-import ContentFeed from "./components/shelter";
 import {CardList} from "./components/card-list/pet-card.component";
 import {Search} from "./components/search/search.component";
 
 
 class App extends Component {
-
   constructor() {
     super();
     this.state = {
@@ -20,12 +18,13 @@ class App extends Component {
       searchField:""
     };
   }
-​
+
   componentDidMount() {
-    fetch('https://jensenry.pythonanywhere.com/api/pets/?format=json')
+    fetch('http://jensenry.pythonanywhere.com/api/pets/?format=json')
     .then(response => response.json())
     .then(names => this.setState({pets: names}))
   }
+
   render() {
     const {pets, searchField} = this.state;
     const filteredPets = pets.filter(item => {
@@ -42,7 +41,6 @@ class App extends Component {
               <Route path="/login" component={Login} />
               <Route path="/register" component={Register} />
               <Route path="/registershelter" component={RegisterShelter} />
-              <Route path="/shelter" component={ContentFeed} />
             </Switch>
           </Layout>
         </Router>
