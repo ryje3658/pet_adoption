@@ -1,5 +1,5 @@
 import React, { Component} from "react";
-import { Button, Form, Input, TextArea, Divider, Grid, Popup } from 'semantic-ui-react'
+import { Button, Form, Input, TextArea, Divider, Grid, Popup, Message } from 'semantic-ui-react'
 import axios from 'axios';
 import "./newpet.css";
 
@@ -31,7 +31,8 @@ class PetForm extends Component {
         picture_primary: null,
         picture_second: null,
         picture_third: null,
-        disableddispo: null
+        disableddispo: null,
+        visible: false
         };
  
     submitHandler = event => {
@@ -59,6 +60,9 @@ class PetForm extends Component {
             Authorization: `Bearer ${token}`
           }
         }).then((res) => {
+          if (res.status === 201) {          
+            this.setState({visible: true})
+          }                                         
           console.log(res)
         })
         .catch((error) => {
@@ -301,6 +305,16 @@ class PetForm extends Component {
                 </Grid>
                 </Form.Field>
                 <div>
+                  { this.state.visible === true &&              
+                      <Message
+                      compact
+                      onDismiss={this.handleDismiss}
+                      color='green'
+                      header='Pet Added!'
+                      content= {this.state.name  + ' has been added to your shelter.'}
+                      />
+                  }
+                  <br></br>
                   <Button disabled={
                     !this.state.name
                     || !this.state.type
