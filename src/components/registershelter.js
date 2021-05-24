@@ -84,10 +84,16 @@ class RegisterShelter extends Component {
                 type="password"
               />
               {error && (
-                <Message negative>
-                <Message.Header>Unable to Signup</Message.Header>
-                <p>Please check your credentials</p>
-              </Message>
+                <Message
+                error
+                header='There was some errors with your submission'
+                list={[
+                  'Please check:',
+                  'All field cannot left blank',
+                  'Enter a valid email address.',
+                  'The password must contain at least 8 characters.'
+                ]}
+              />
               )}
               <Button
                 color="blue"
