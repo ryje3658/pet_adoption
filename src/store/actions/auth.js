@@ -86,7 +86,7 @@ export const authLogin = (username, password) => {
       })
       .catch((err) => {
         dispatch(loginFail(err));
-        window.location.href = "/login";
+        //window.location.href = "/login";
       });
   };
 };
@@ -106,14 +106,11 @@ export const authSignup = (username, email, password, confirm_password) => {
       })
       .then((res) => {
         const token = res.data.access;
-        localStorage.setItem("token", token);
-        dispatch(signupSuccess(token));
-        window.location.replace("/");
-        dispatch(checkAuthTimeout(3600));
+        window.location.replace("/login");
       })
       .catch((err) => {
         dispatch(signupFail(err));
-        window.location.replace("/register");
+        //window.location.replace("/register");
       });
   };
 };
@@ -133,14 +130,11 @@ export const authSignupShelter = (username, email, password, confirm_password) =
       })
       .then((res) => {
         const token = res.data.access;
-        localStorage.setItem("token", token);
-        dispatch(signupSuccess(token));
-        window.location.replace("/");
-        dispatch(checkAuthTimeout(3600));
+        window.location.replace("/login");
       })
       .catch((err) => {
         dispatch(signupFail(err));
-        window.location.replace("/registershelter");
+        //window.location.replace("/registershelter");
       });
   };
 };
