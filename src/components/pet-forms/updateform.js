@@ -422,7 +422,7 @@ class UpdateForm extends Component {
                     <Grid container>
                         <Grid.Row>
                             <Grid.Column width={3}>
-                                <Image src={this.state.picture_primary} className="image" alt="primary"/>
+                                <Image src={this.state.picture_primary} className="picture" alt="primary"/>
                             </Grid.Column>
                             <Grid.Column width={10}>
                                 <input className="newimg" type="file" name='picture_primary' id='picture_primary' accept="image/*"  onChange={this.changeHandler} />
@@ -431,7 +431,7 @@ class UpdateForm extends Component {
                         <Grid.Row>
                             <Grid.Column width={3}>
                                 { this.state.secondhidden === false &&
-                                    <Image src={this.state.picture_second} className="image" id="second" alt="second"/>
+                                    <Image src={this.state.picture_second} className="picture" id="second" alt="second"/>
                                 }
                             </Grid.Column>
                             <Grid.Column width={10}>
@@ -444,7 +444,7 @@ class UpdateForm extends Component {
                         <Grid.Row>
                             <Grid.Column width={3}>
                                 { this.state.thirdhidden === false &&
-                                    <Image src={this.state.picture_third} className="image" id="third" alt="third"/>
+                                    <Image src={this.state.picture_third} className="picture" id="third" alt="third"/>
                                 }  
                             </Grid.Column> 
                             <Grid.Column width={10}>

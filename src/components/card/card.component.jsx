@@ -7,12 +7,10 @@ export const CardComp = props => (
     <div className='card-container'>
         <Card.Group>
             <Card fluid>
-                <div className='image'>
                     <Image
                         src={props.pet.picture_primary}
-
+                        className='animal-pics'
                     />
-                </div>
                 <Card.Content>
                     <Card.Header>{props.pet.name}</Card.Header>
                     <Card.Meta>{props.pet.type}</Card.Meta>
@@ -34,6 +32,12 @@ export const CardComp = props => (
                 </Card.Content>
                 <Card.Content extra>
                     <strong>Availability:</strong> {props.pet.availability} 
+                    
+                </Card.Content>
+                <Card.Content extra>
+                <button class="ui primary button">
+                    Like
+                </button>
                 </Card.Content>
             </Card>
         </Card.Group>
