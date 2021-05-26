@@ -1,5 +1,5 @@
 import React, { Component} from "react";
-import { Button, Form, Input, TextArea, Divider, Grid, Image, Popup} from 'semantic-ui-react'
+import { Button, Form, Input, TextArea, Divider, Grid, Image, Popup, Message } from 'semantic-ui-react'
 import { Redirect} from "react-router-dom";
 import axios from 'axios';
 import "./updateform.css";
@@ -12,11 +12,6 @@ const other = ["Fish", "Reptile", "Small Mammal", "Bird", "Other"]
 let petoptions= null; 
 let options = null;
 let dispo = [];
-
-// PET ID CURRENTLY HARDCOADED UNTIL MERGE
-//let id = this.props.location.state.id;
-//let id = 30
-
 
 let pet;
 //get token saved
@@ -45,7 +40,8 @@ class UpdateForm extends Component {
         newthird: false, 
         removesecond: false,
         removethird: false,
-        redirect: false
+        redirect: false,
+        visible: false
         };   
         
     // submits updated pet infomration from form
@@ -135,10 +131,12 @@ class UpdateForm extends Component {
           console.error(error)
           })
         }
+        this.setState({visible: true})   
     }
 
     // loads the pet data into form fields
     componentDidMount() {
+      window.scrollTo(0, 0);                                         
       let id = this.props.location.state.id
         axios.get(`http://jensenry.pythonanywhere.com/api/pets/${id}/`,{
             headers: {
@@ -252,14 +250,16 @@ class UpdateForm extends Component {
     removehandlers = () =>{
       this.setState( {picture_second: null} );
       this.setState({removesecond: true});  
-      this.setState({secondhidden: true})
+      this.setState({secondhidden: true});
+      this.setState({newsecond: false})              
     }
 
     // removes third picture
     removehandlert = () =>{
       this.setState( {picture_third: null} );
       this.setState({removethird: true});  
-      this.setState({thirdhidden: true})
+      this.setState({thirdhidden: true});
+      this.setState({newthird: false})                              
     }
     
     // deletes pet
@@ -276,7 +276,10 @@ class UpdateForm extends Component {
     // after pet removed, redirects
     removeredirect = () =>{
       if (this.state.redirect){
-        return <Redirect to='/shelter' />
+        return <Redirect to={{    
+          pathname: "/shelter",
+          state: { visible: true }
+        }} />
       }
     }
 
@@ -419,44 +422,66 @@ class UpdateForm extends Component {
                 <br></br>
                 <Form.Field className='ten wide column' allownull='true'>
                 <label className="labels">Change Images of Pet: </label>
-                    <Grid container>
-                        <Grid.Row>
-                            <Grid.Column width={3}>
-                                <Image src={this.state.picture_primary} className="image" alt="primary"/>
-                            </Grid.Column>
-                            <Grid.Column width={10}>
-                                <input className="newimg" type="file" name='picture_primary' id='picture_primary' accept="image/*"  onChange={this.changeHandler} />
-                            </Grid.Column>
-                        </Grid.Row>
-                        <Grid.Row>
-                            <Grid.Column width={3}>
-                                { this.state.secondhidden === false &&
-                                    <Image src={this.state.picture_second} className="image" id="second" alt="second"/>
-                                }
-                            </Grid.Column>
-                            <Grid.Column width={10}>
-                                <input type="file" className="newimg" name='picture_second' id='picture_second' accept="image/*" onChange={this.changeHandler} />
-                                { this.state.secondhidden === false &&
-                                    <Button type='button' id="removeb" onClick={this.removehandlers} primary>Remove Photo</Button>
-                                }
-                            </Grid.Column>
-                        </Grid.Row>
-                        <Grid.Row>
-                            <Grid.Column width={3}>
-                                { this.state.thirdhidden === false &&
-                                    <Image src={this.state.picture_third} className="image" id="third" alt="third"/>
-                                }  
-                            </Grid.Column> 
-                            <Grid.Column width={10}>
-                                <input type="file" className="newimg" name='picture_third' id='picture_third' accept="image/*"  onChange={this.changeHandler} />
-                                { this.state.thirdhidden === false &&
-                                    <Button type='button' id="removec" onClick={this.removehandlert} primary>Remove Photo</Button>
-                                }
-                            </Grid.Column>
-                        </Grid.Row>
+                <Grid verticalAlign='middle' container>
+                      <Grid.Row>
+                        <Grid.Column width={3}>
+                            <Image src={this.state.picture_primary} className="picture" alt="primary"/>
+                        </Grid.Column>
+                        <Grid.Column width={10}>
+                            <input className="newimg" type="file" name='picture_primary' id='picture_primary' accept="image/*"  onChange={this.changeHandler} />
+                        </Grid.Column>
+                      </Grid.Row>
+                      <Grid.Row>
+                        <Grid.Column width={3}>
+                          { this.state.secondhidden === false &&
+                              <Image src={this.state.picture_second} className="pictre" id="second" alt="second"/>
+                          }
+                        </Grid.Column>
+                        <Grid.Column width={10}>
+                          <input type="file" className="newimg" name='picture_second' id='picture_second' accept="image/*" onChange={this.changeHandler} />
+                        </Grid.Column>
+                        <Grid.Column width={1}>
+                          <Popup                                          //new code
+                            className='remove'
+                            trigger={<Button icon="remove" color='red' type='button' onClick={this.removehandlers}></Button>}
+                            content='Image Removed'
+                            position='right center'
+                            on="click"
+                          />
+                        </Grid.Column>
+                      </Grid.Row>
+                      <Grid.Row>
+                        <Grid.Column width={3}>
+                          { this.state.thirdhidden === false &&
+                              <Image src={this.state.picture_third} className="picture" id="third" alt="third"/>
+                          }  
+                        </Grid.Column> 
+                        <Grid.Column width={10}>
+                          <input type="file" className="newimg" name='picture_third' id='picture_third' accept="image/*" onChange={this.changeHandler} />
+                        </Grid.Column>
+                        <Grid.Column width={1}>
+                          <Popup
+                            className='remove'
+                            trigger={<Button icon="remove" color='red' type='button' onClick={this.removehandlert}></Button>}
+                            content='Image Removed'
+                            position='right center'
+                            on="click"
+                          />
+                        </Grid.Column>
+                      </Grid.Row>
                     </Grid>
                 </Form.Field>
                 <div>
+                  { this.state.visible === true &&          
+                    <Message
+                    compact
+                    onDismiss={this.handleDismiss}
+                    color='green'
+                    header='Pet Updated!'
+                    content= {this.state.name  + ' has been updated in your shelter.'}
+                    />
+                    }
+                  <br></br>
                   <Button type="submit" primary>Save</Button>
                 </div>
                 <Divider hidden />
