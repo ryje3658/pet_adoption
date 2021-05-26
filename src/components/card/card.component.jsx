@@ -34,11 +34,6 @@ export const CardComp = props => (
                     <strong>Availability:</strong> {props.pet.availability} 
                     
                 </Card.Content>
-                <Card.Content extra>
-                <button class="ui primary button">
-                    Like
-                </button>
-                </Card.Content>
             </Card>
         </Card.Group>
     </div> 
