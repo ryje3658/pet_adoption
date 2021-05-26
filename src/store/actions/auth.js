@@ -105,7 +105,6 @@ export const authSignup = (username, email, password, confirm_password) => {
         confirm_password: confirm_password,
       })
       .then((res) => {
-        const token = res.data.access;
         window.location.replace("/login");
       })
       .catch((err) => {
@@ -129,7 +128,6 @@ export const authSignupShelter = (username, email, password, confirm_password) =
         confirm_password: confirm_password,
       })
       .then((res) => {
-        const token = res.data.access;
         window.location.replace("/login");
       })
       .catch((err) => {
