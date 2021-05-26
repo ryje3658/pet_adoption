@@ -8,15 +8,12 @@ import { connect } from "react-redux";
 import * as actionTypes from "../store/actions/auth";
 import { Link } from "react-router-dom";
 
-
 class Layout extends Component {
   componentDidMount() {
     this.props.autoSignin();
   }
 
   render() {
-    
-
     
     return (
 
@@ -34,7 +31,7 @@ class Layout extends Component {
                 <>
                   <React.Fragment>
                     <Link to="/shelter">
-                      <Menu.Item>Welcome</Menu.Item>
+                      <Menu.Item>Profile</Menu.Item>
                     </Link>
                   </React.Fragment>
                   <React.Fragment>
@@ -51,10 +48,7 @@ class Layout extends Component {
 
                   </React.Fragment>
 
-
                 </>
-
-
 
 
               ) : (
@@ -76,7 +70,6 @@ class Layout extends Component {
         </Menu>
 
         {this.props.children}
-
 
       </div>
     );
