@@ -7,12 +7,10 @@ export const CardComp = props => (
     <div className='card-container'>
         <Card.Group>
             <Card fluid>
-                <div className='image'>
-                    <Image
-                        src={props.pet.picture_primary}
-
-                    />
-                </div>
+                <Image
+                    src={props.pet.picture_primary}
+                    className='animal-pics'
+                />
                 <Card.Content>
                     <Card.Header>{props.pet.name}</Card.Header>
                     <Card.Meta>{props.pet.type}</Card.Meta>

@@ -15,3 +15,9 @@
     transform: scale(1.05);
   }
   
+  .animal-pics {
+    align-items: stretch;
+    height: 400px;
+    display: inline;
+    vertical-align: middle;
+  }
