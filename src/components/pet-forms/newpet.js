@@ -247,8 +247,9 @@ class PetForm extends Component {
                   <div className="ui input">
                   <select  name='availability' id='availability' value={this.state.availability} onChange={this.changeHandler}>
                     <option hidden>Select One</option>
+                    <option>Not Available</option>
                     <option>Available</option>
-                    <option>Adoption Pending</option>
+                    <option>Pending</option>
                     <option>Adopted</option>
                   </select>
                   </div>
