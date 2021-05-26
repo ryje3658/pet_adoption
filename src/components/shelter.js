@@ -42,10 +42,10 @@ function AnimalCard (props) {
           </Card.Description>
       </Card.Content>
       <Card.Content extra>
-        <a>
+        <p>
           <Icon name='tag' />
           {animal.availability}
-        </a>
+        </p>
       </Card.Content>
       <Card.Content extra>
         <div>
