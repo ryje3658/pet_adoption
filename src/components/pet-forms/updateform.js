@@ -85,7 +85,7 @@ class UpdateForm extends Component {
         if (this.state.newthird === true) {
           formdata.append('picture_third', this.state.picture_third, this.state.picture_third.name);
         }
-        axios.patch(`http://jensenry.pythonanywhere.com/api/pets/${id}/`, formdata, {
+        axios.patch(`https://jensenry.pythonanywhere.com/api/pets/${id}/`, formdata, {
           headers: {
             "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${token}`
@@ -103,7 +103,7 @@ class UpdateForm extends Component {
             data['picture_third'] = this.state.picture_third;
           }
           console.log(data)
-          axios.patch(`http://jensenry.pythonanywhere.com/api/pets/${id}/`, data, 
+          axios.patch(`https://jensenry.pythonanywhere.com/api/pets/${id}/`, data, 
           {
           headers: {
               "Content-Type": "application/json",
@@ -118,7 +118,7 @@ class UpdateForm extends Component {
         } 
         if (this.state.removethird === true) {
           data['picture_third'] = this.state.picture_third;
-          axios.patch(`http://jensenry.pythonanywhere.com/api/pets/${id}/`, data, 
+          axios.patch(`https://jensenry.pythonanywhere.com/api/pets/${id}/`, data, 
           {
           headers: {
               "Content-Type": "application/json",
@@ -138,7 +138,7 @@ class UpdateForm extends Component {
     componentDidMount() {
       window.scrollTo(0, 0);                                         
       let id = this.props.location.state.id
-        axios.get(`http://jensenry.pythonanywhere.com/api/pets/${id}/`,{
+        axios.get(`https://jensenry.pythonanywhere.com/api/pets/${id}/`,{
             headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${token}`
@@ -265,7 +265,7 @@ class UpdateForm extends Component {
     // deletes pet
     removepet = () => {
       let id = this.props.location.state.id
-        axios.delete(`http://jensenry.pythonanywhere.com/api/pets/${id}/`, {
+        axios.delete(`https://jensenry.pythonanywhere.com/api/pets/${id}/`, {
           headers: {
               Authorization: `Bearer ${token}`
             }
