@@ -48,7 +48,7 @@ export const signupFail = (error) => {
 
 // Logout to remove token from cookie
 export const authLogout = () => {
-  window.location.replace("/login");
+  window.location.replace("/");
   localStorage.removeItem("token");
   return {
     type: AUTH_LOGOUT,
