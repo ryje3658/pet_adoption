@@ -54,7 +54,7 @@ class PetForm extends Component {
         if (this.state.picture_third !== null) {
           formdata.append('picture_third', this.state.picture_third, this.state.picture_third.name);
         }
-        axios.post('http://jensenry.pythonanywhere.com/api/pets/', formdata, {
+        axios.post('https://jensenry.pythonanywhere.com/api/pets/', formdata, {
           headers: {
             "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${token}`
