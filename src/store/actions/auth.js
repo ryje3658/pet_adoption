@@ -105,7 +105,7 @@ export const authSignup = (username, email, password, confirm_password) => {
         confirm_password: confirm_password,
       })
       .then((res) => {
-        window.location.replace("/login");
+        window.location.replace("/");
       })
       .catch((err) => {
         dispatch(signupFail(err));
@@ -128,7 +128,7 @@ export const authSignupShelter = (username, email, password, confirm_password) =
         confirm_password: confirm_password,
       })
       .then((res) => {
-        window.location.replace("/login");
+        window.location.replace("/");
       })
       .catch((err) => {
         dispatch(signupFail(err));
@@ -146,7 +146,7 @@ export const authCheckState = () => {
     const token = localStorage.getItem("token");
     if (token === undefined) {
       dispatch(authLogout());
-      window.location.replace("/login");
+      window.location.replace("/");
     } else {
       dispatch(loginSuccess(token));
       dispatch(checkAuthTimeout(3600));
