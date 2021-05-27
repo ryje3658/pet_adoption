@@ -12,7 +12,7 @@ class Pets extends Component{
       }
 
       componentDidMount() {
-        fetch('http://jensenry.pythonanywhere.com/api/pets/?format=json')
+        fetch('https://jensenry.pythonanywhere.com/api/pets/?format=json')
         .then(response => response.json())
         .then(names => this.setState({pets: names}))
       }
